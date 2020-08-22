@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import axios from 'axios';
 
 class App extends React.Component {
   state = {
     isLoading: true,
     movies: [],
   };
+
+  getMovies = async () => {
+    const movies = await axios.get('https://yts.mx/api/v2/list_movies.json');
+  };
+
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({ isLoading: false });
-    }, 6000);
+    // setTimeout(() => {
+    //   this.setState({ isLoading: false });
+    // }, 6000);
+    // //Loading...에서 6초 후 we are ready로 바뀜
+    this.getMovies();
   }
   render() {
     const { isLoading } = this.state;
@@ -66,4 +73,10 @@ export default App;
  *
  * 3. unmounting 죽을 때 ex) 페이지 바뀔 때
  * componentWillUnmount()
+ */
+/**
+ * data fetching 하기
+ * axios 설치 npm install axios
+ * yts proxy api https://yts.mx/api/v2/list_movies.json
+ *
  */
