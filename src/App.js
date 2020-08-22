@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function Food({ fav, picture }) {
+function Food({ fav, picture, rating }) {
   // 인자로 props를 넣어도 되고 {fav}도 됨
   // console.log(props); //object
   // console.log(props.fav); //kimchi
@@ -8,10 +9,18 @@ function Food({ fav, picture }) {
   return (
     <div>
       <h2>I like {fav}</h2>
+      <h4>{rating}/5.0</h4>
       <img src={picture} alt={fav} />
     </div>
   );
 }
+
+Food.propTypes = {
+  name: PropTypes.string.isRequired,
+  picture: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+};
+// Failed prop type: Invalid prop `rating` of type `number` supplied to `Food`, expected `string`.
 
 // food의 object 의 배열
 const foodILike = [
@@ -20,23 +29,27 @@ const foodILike = [
     name: 'Kimchi',
     image:
       'https://contents.lotteon.com/itemimage/LD/13/34/17/29/7_/0/LD133417297_0_1.jpg/dims/resizef/256x256',
+    rating: 5,
   },
   {
     id: 2,
     name: 'ramen',
     image:
       'https://img1.daumcdn.net/relay/cafe/original/?fname=http%3A%2F%2Fkid.chosun.com%2Fsite%2Fdata%2Fimg_dir%2F2014%2F08%2F24%2F2014082402054_0.jpg',
+    rating: 4.9,
   },
   {
     id: 3,
     name: 'bread',
     image: 'https://t1.daumcdn.net/cfile/blog/2555774C58EC9C3D11',
+    rating: 4.5,
   },
   {
     id: 4,
     name: 'apple',
     image:
       'https://i5.walmartimages.ca/images/Enlarge/094/514/6000200094514.jpg',
+    rating: 5.5,
   },
 ];
 
@@ -44,7 +57,12 @@ function App() {
   return (
     <div>
       {foodILike.map((dish) => (
-        <Food key={dish.id} name={dish.name} picture={dish.image}></Food>
+        <Food
+          key={dish.id}
+          name={dish.name}
+          picture={dish.image}
+          rating={dish.rating}
+        ></Food>
       ))}
     </div>
   );
@@ -97,10 +115,20 @@ export default App;
  *     </div>
  *   );
  * }
- *
- *
+ */
+/*
  * img src 태그에 alt도 설정을 해줘야
  * img elements must have an alt prop, either with meaningful text, or an empty string for decorative images  jsx-a11y/alt-text
  * 이런 문구가 콘솔창에 뜨지 않음
+ */
+
+/* 내가 전달받은 props가 내가 원하는 props 인지 확인하는 방법
+ * npm i prop-types
+ * Food 컴포넌트가 다른 파일에 있을 수 있고 picture 대신 image를 보내는 실수를 할 수 있음
+ * Food 컴포넌트는 picture를 예측 imgae는 유효하지 않음
+ * 너 뭔가 실수했고 너의 컴포넌트는 제대로 동작하지 않을거야...라고 알려주는 것
+ * 제대로 설치가 됐다면, package.json dependencies에서 확인 가능
  *
+ * import PropTypes from 'prop-types'
+ * Food 컴포넌트 밑에 Food.propTypes = { 여기에 내가 얻고싶은 props에 대한 설명을 적음}
  */
