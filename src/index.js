@@ -17,4 +17,7 @@ ReactDOM.render(
  * jsx는 javascript 안의 HTML, 카멜케이스로
  * react app은 하나의 컴포넌트만을 랜더링 해야함 -> 여기선 <App />
  * 두개 이상 하면 에러
+ *  <App /> 안에 많은 컴포넌트를 넣을 수 있음
+ * 그 컴포넌트 안에 또 여러개의 컴포넌트들을 import 할 수 있음
+ * 결과물 : 개쩌는 동적인 application
  */
