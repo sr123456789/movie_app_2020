@@ -8,7 +8,7 @@ function Food({ fav, picture }) {
   return (
     <div>
       <h2>I like {fav}</h2>
-      <img src={picture} />
+      <img src={picture} alt={fav} />
     </div>
   );
 }
@@ -16,20 +16,24 @@ function Food({ fav, picture }) {
 // food의 object 의 배열
 const foodILike = [
   {
+    id: 1,
     name: 'Kimchi',
     image:
-      'https://www.maangchi.com/wp-content/uploads/2019/11/vegankimchi-insta.jpg',
+      'https://contents.lotteon.com/itemimage/LD/13/34/17/29/7_/0/LD133417297_0_1.jpg/dims/resizef/256x256',
   },
   {
+    id: 2,
     name: 'ramen',
     image:
       'https://img1.daumcdn.net/relay/cafe/original/?fname=http%3A%2F%2Fkid.chosun.com%2Fsite%2Fdata%2Fimg_dir%2F2014%2F08%2F24%2F2014082402054_0.jpg',
   },
   {
+    id: 3,
     name: 'bread',
     image: 'https://t1.daumcdn.net/cfile/blog/2555774C58EC9C3D11',
   },
   {
+    id: 4,
     name: 'apple',
     image:
       'https://i5.walmartimages.ca/images/Enlarge/094/514/6000200094514.jpg',
@@ -40,7 +44,7 @@ function App() {
   return (
     <div>
       {foodILike.map((dish) => (
-        <Food fav={dish.name} picture={dish.image}></Food>
+        <Food key={dish.id} name={dish.name} picture={dish.image}></Food>
       ))}
     </div>
   );
@@ -78,4 +82,25 @@ export default App;
  * 비효율적, 새로운 음식을 추가할 때마다 복붙 해야함
  * food 컴포넌트에 동적으로 데이터 추가하기
  * 배열을 만들고(foodILike) app 컴포넌트에서 매핑으로 출력되게 만듦
+ *
+ *
+ * 이렇게도 정리 가능
+ * function renderFood(dish) {
+ *   return <Food name={dish.name} picture={dish.image}></Food>;
+ * }
+ *
+ * function App() {
+ *   return (
+ *     <div>
+ *       {console.log(foodILike.map(renderFood))}
+ *       {foodILike.map(renderFood)}
+ *     </div>
+ *   );
+ * }
+ *
+ *
+ * img src 태그에 alt도 설정을 해줘야
+ * img elements must have an alt prop, either with meaningful text, or an empty string for decorative images  jsx-a11y/alt-text
+ * 이런 문구가 콘솔창에 뜨지 않음
+ *
  */
