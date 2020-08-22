@@ -1,21 +1,47 @@
 import React from 'react';
 
-function Food(props) {
+function Food({ fav, picture }) {
   // 인자로 props를 넣어도 되고 {fav}도 됨
   // console.log(props); //object
   // console.log(props.fav); //kimchi
   // props.fav === {fav} es6 문법
-  return <h3>I like {props.fav}</h3>;
+  return (
+    <div>
+      <h2>I like {fav}</h2>
+      <img src={picture} />
+    </div>
+  );
 }
+
+// food의 object 의 배열
+const foodILike = [
+  {
+    name: 'Kimchi',
+    image:
+      'https://www.maangchi.com/wp-content/uploads/2019/11/vegankimchi-insta.jpg',
+  },
+  {
+    name: 'ramen',
+    image:
+      'https://img1.daumcdn.net/relay/cafe/original/?fname=http%3A%2F%2Fkid.chosun.com%2Fsite%2Fdata%2Fimg_dir%2F2014%2F08%2F24%2F2014082402054_0.jpg',
+  },
+  {
+    name: 'bread',
+    image: 'https://t1.daumcdn.net/cfile/blog/2555774C58EC9C3D11',
+  },
+  {
+    name: 'apple',
+    image:
+      'https://i5.walmartimages.ca/images/Enlarge/094/514/6000200094514.jpg',
+  },
+];
 
 function App() {
   return (
     <div>
-      <h1>Hello!!!!!!!</h1>
-      <Food fav='kimchi'></Food>
-      <Food fav='ramen'></Food>
-      <Food fav='bread'></Food>
-      <Food fav='apple'></Food>
+      {foodILike.map((dish) => (
+        <Food fav={dish.name} picture={dish.image}></Food>
+      ))}
     </div>
   );
 }
@@ -33,7 +59,6 @@ export default App;
  * 누군가 Food 컴포넌트로 정보를 보내려고하면 react는 모든 속성(props)를 가져옴
  * 그리고 Food func 컴포넌트의 argument로 넣음
  *
- *
  * 정리
  * app이 food에게 props 를 사용해서 data를 보내는 방법
  * props : 뭐든 컴포넌트에 넣게 되는 것들
@@ -45,4 +70,12 @@ export default App;
  * function food ({fav}) {
  *   return <h1>i love {fav}</h1>
  * }
+ *
+ *
+ * <Food fav='kimchi />
+ * <Food fav='kimbab />
+ * ....
+ * 비효율적, 새로운 음식을 추가할 때마다 복붙 해야함
+ * food 컴포넌트에 동적으로 데이터 추가하기
+ * 배열을 만들고(foodILike) app 컴포넌트에서 매핑으로 출력되게 만듦
  */
